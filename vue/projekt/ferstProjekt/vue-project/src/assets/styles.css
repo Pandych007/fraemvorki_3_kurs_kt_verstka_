@@ -1,0 +1,131 @@
+@font-face {
+  font-family: "Epilogue";
+  src: url(./assets/fonts/Epilogue/static/Epilogue-Regular.ttf);
+}
+header,
+footer {
+  font-family: "Epilogue";
+  max-width: 1280px;
+  margin: auto;
+  padding: 10px 20px;
+  box-sizing: border-box;
+}
+
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  flex-shrink: 0;
+}
+
+.menu {
+  display: flex;
+  gap: 20px;
+}
+
+.menu p {
+  margin: 0;
+  cursor: pointer;
+}
+.headerText {
+  display: flex;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.text {
+  width: 70%;
+}
+
+.text1 {
+  font-family: "Epilogue";
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 30px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+}
+
+.text2 {
+  font-family: "Epilogue";
+  font-size: 38px;
+  font-weight: 600;
+  line-height: 69.7px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+}
+.text3 {
+  font-family: "Epilogue";
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 27px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+}
+
+.text4 {
+  font-family: "Epilogue";
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 30px;
+  text-align: center;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: white;
+  background-color: #2d2d2d;
+  border: none;
+  width: Hug (211px) px;
+  height: Hug (78px) px;
+  padding: 24px 64px 24px 64px;
+  gap: 10px;
+  opacity: 0px;
+}
+
+.parters {
+  display: flex;
+  margin-top: 20px;
+}
+.parters div {
+  width: Fill (1, 380px) px;
+  height: Hug (130.83px) px;
+  padding: 42px 68px 42px 68px;
+  gap: 0px;
+
+  opacity: 0px;
+}
+
+.footer {
+  display: flex;
+}
+
+.footer > div {
+  width: 50%;
+}
+.social {
+  list-style: none;
+}
+.social li {
+  display: inline-block;
+  margin-right: 40px;
+}
+
+.formelem {
+  width: Fill (520px) px;
+  height: Hug (59px) px;
+  min-width: 320px;
+  max-width: 520px;
+  padding: 16px 24px 16px 24px;
+  gap: 10px;
+  opacity: 0px;
+  margin: 10px;
+}
+
+.button {
+  margin: 10px;
+}
