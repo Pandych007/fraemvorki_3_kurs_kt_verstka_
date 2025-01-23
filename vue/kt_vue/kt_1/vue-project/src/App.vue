@@ -1,11 +1,7 @@
 <template>
   <div>
-    <AddForm @addTodo="addTodo" />
-    <TodoList
-      :todos="todos"
-      @changeTodos="changeTodos"
-      @deleteTodoByid="deleteTodoByid"
-    />
+    <AddForm @addNewTodo="addNewTodo" />
+    <TodoList :todos="data" @removeTodo="removeTodo" @changeTodo="changeTodo" />
   </div>
 </template>
 
@@ -19,43 +15,52 @@ export default {
     TodoList,
   },
   data() {
-    const startTodos = [
-      { id: 1, title: "Помыть руки", completed: true },
-      { id: 2, title: "Сделать зарядку", completed: false },
-      { id: 3, title: "Наконец изучить Vue", completed: true },
-    ];
-    let localData = JSON.parse(localStorage.getItem("todos"));
     return {
-      todos: localData || startTodos,
+      data: [
+        { title: "Закончить колледж", completed: false },
+        { title: "Пойти учиться дальше", completed: false },
+        { title: "Найти работу по душе", completed: false },
+        { title: "Начать изучать что-то новое", completed: true },
+      ],
     };
   },
   methods: {
-    addTodo(title) {
+    addNewTodo(title) {
       let newTodo = {
-        id: Date.now(),
-        title,
         completed: false,
+        title: title,
       };
-      this.todos.push(newTodo);
+      this.data.push(newTodo);
     },
-    changeTodos(id) {
-      const todo = this.todos.find((todo) => todo.id === id);
-      if (todo) {
-        todo.completed = !todo.completed;
-      }
+    removeTodo(index) {
+      this.data.splice(index, 1);
     },
-    deleteTodoByid(id) {
-      this.todos = this.todos.filter((todo) => todo.id !== id);
-    },
-  },
-  watch: {
-    todos(newTodos) {
-      localStorage.setItem("todos", JSON.stringify(newTodos));
+    changeTodo(index) {
+      this.data[index].completed = !this.data[index].completed;
     },
   },
 };
 </script>
 
-<style scoped>
-/* Ваши стили */
+<style>
+.todo_item {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 170px;
+  padding: 10px;
+  outline: 2px solid rgb(140, 140, 140);
+  box-shadow: 20px 20px 10px rgba(0, 0, 0, 0.1);
+}
+
+.input_elem {
+  display: flex;
+  justify-content: center;
+  margin: 20px 400px;
+}
+
+.input_elem > input {
+  width: 100%;
+  box-shadow: 1px 1px 3px black;
+}
 </style>
+ы
