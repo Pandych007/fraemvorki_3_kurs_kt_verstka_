@@ -1,55 +1,71 @@
 <template>
   <div>
-    <AddForm @addTodo="addTodo" />
+    <AddForm @addNewTodo="addNewTodo"></AddForm>
     <TodoList
-      :todos="todos"
+      :todos="data"
+      @removeTodo="removeTodo"
       @changeTodo="changeTodo"
-      @deleteTodo="deleteTodo"
-    />
+    ></TodoList>
   </div>
 </template>
 
 <script>
-import AddForm from "./components/AddForm.vue"; // Используем правильное имя компонента
+import AddForm from "./components/AddForm.vue";
 import TodoList from "./components/TodoList.vue";
+import TodoItem from "./components/TodoItem.vue";
 
 export default {
   components: {
     AddForm,
     TodoList,
+    TodoItem,
   },
   data() {
     return {
-      todos: [
-        { id: 1, title: "Закончить колледж", completed: false },
-        { id: 2, title: "Пойти учиться дальше", completed: false },
-        { id: 3, title: "Найти работу по душе", completed: false },
-        { id: 4, title: "Начать изучать что-то новое", completed: true },
+      data: [
+        { title: "Закончить колледж", completed: false },
+        { title: "Пойти учиться дальше", completed: false },
+        { title: "Найти работу по душе", completed: false },
+        { title: "Начать изучать что-то новое", completed: true },
       ],
     };
   },
   methods: {
-    addTodo(title) {
-      const newTodo = {
-        id: Date.now(),
-        title,
+    addNewTodo(title) {
+      let newTodo = {
         completed: false,
+        title: title,
       };
-      this.todos.push(newTodo);
+      this.data.push(newTodo);
     },
-
-    changeTodo(id) {
-      const todo = this.todos.find((todo) => todo.id === id);
-      if (todo) {
-        todo.completed = !todo.completed;
-      }
+    removeTodo(index) {
+      this.data.splice(index, 1);
     },
-
-    deleteTodo(id) {
-      this.todos = this.todos.filter((todo) => todo.id !== id);
+    changeTodo(index) {
+      this.data[index].completed = !this.data[index].completed;
     },
   },
 };
 </script>
 
-<style scoped></style>
+<style>
+.todo_item {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 170px;
+  padding: 10px;
+  outline: 2px solid rgb(140, 140, 140);
+  box-shadow: 20px 20px 10px rgba(0, 0, 0, 0.1);
+}
+
+.input_elem {
+  display: flex;
+  justify-content: center;
+  margin: 20px 400px;
+}
+
+.input_elem > input {
+  width: 100%;
+  box-shadow: 1px 1px 3px black;
+}
+</style>
