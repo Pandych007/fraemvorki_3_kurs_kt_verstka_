@@ -9,9 +9,7 @@ export default {
   emits: ["addNewTodo"],
   methods: {
     addNewTodo(event) {
-      if (event.key == "Enter") {
-        this.$emit("addNewTodo", event.target.value);
-      }
+      this.$emit("addNewTodo", event.target.value);
     },
   },
 };
