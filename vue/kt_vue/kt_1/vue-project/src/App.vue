@@ -1,71 +1,61 @@
 <template>
   <div>
-    <AddForm @addNewTodo="addNewTodo"></AddForm>
+    <AddForm @addTodo="addTodo" />
     <TodoList
-      :todos="data"
-      @removeTodo="removeTodo"
-      @changeTodo="changeTodo"
-    ></TodoList>
+      :todos="todos"
+      @changeTodos="changeTodos"
+      @deleteTodoByid="deleteTodoByid"
+    />
   </div>
 </template>
 
 <script>
 import AddForm from "./components/AddForm.vue";
 import TodoList from "./components/TodoList.vue";
-import TodoItem from "./components/TodoItem.vue";
 
 export default {
   components: {
     AddForm,
     TodoList,
-    TodoItem,
   },
   data() {
+    const startTodos = [
+      { id: 1, title: "Помыть руки", completed: true },
+      { id: 2, title: "Сделать зарядку", completed: false },
+      { id: 3, title: "Наконец изучить Vue", completed: true },
+    ];
+    let localData = JSON.parse(localStorage.getItem("todos"));
     return {
-      data: [
-        { title: "Закончить колледж", completed: false },
-        { title: "Пойти учиться дальше", completed: false },
-        { title: "Найти работу по душе", completed: false },
-        { title: "Начать изучать что-то новое", completed: true },
-      ],
+      todos: localData || startTodos,
     };
   },
   methods: {
-    addNewTodo(title) {
+    addTodo(title) {
       let newTodo = {
+        id: Date.now(),
+        title,
         completed: false,
-        title: title,
       };
-      this.data.push(newTodo);
+      this.todos.push(newTodo);
     },
-    removeTodo(index) {
-      this.data.splice(index, 1);
+    changeTodos(id) {
+      const todo = this.todos.find((todo) => todo.id === id);
+      if (todo) {
+        todo.completed = !todo.completed;
+      }
     },
-    changeTodo(index) {
-      this.data[index].completed = !this.data[index].completed;
+    deleteTodoByid(id) {
+      this.todos = this.todos.filter((todo) => todo.id !== id);
+    },
+  },
+  watch: {
+    todos(newTodos) {
+      localStorage.setItem("todos", JSON.stringify(newTodos));
     },
   },
 };
 </script>
 
-<style>
-.todo_item {
-  display: flex;
-  flex-direction: column;
-  margin: 20px 170px;
-  padding: 10px;
-  outline: 2px solid rgb(140, 140, 140);
-  box-shadow: 20px 20px 10px rgba(0, 0, 0, 0.1);
-}
-
-.input_elem {
-  display: flex;
-  justify-content: center;
-  margin: 20px 400px;
-}
-
-.input_elem > input {
-  width: 100%;
-  box-shadow: 1px 1px 3px black;
-}
+<style scoped>
+/* Ваши стили */
 </style>

@@ -1,18 +1,29 @@
 <template>
   <div class="input_elem">
-    <input v-on:keydown="addNewTodo" type="text" />
+    <input @keyup.enter="handleKeyUp" />
   </div>
 </template>
 
 <script>
 export default {
-  emits: ["addNewTodo"],
   methods: {
-    addNewTodo(event) {
-      this.$emit("addNewTodo", event.target.value);
+    handleKeyUp(event) {
+      this.$emit("addTodo", event.target.value);
     },
   },
 };
 </script>
 
-<style></style>
+<style scoped>
+.input_elem {
+  display: flex;
+  justify-content: center;
+  margin: 20px 400px;
+}
+
+.input_elem > input {
+  width: 100%;
+  box-shadow: 1px 1px 3px black;
+  outline: none;
+}
+</style>

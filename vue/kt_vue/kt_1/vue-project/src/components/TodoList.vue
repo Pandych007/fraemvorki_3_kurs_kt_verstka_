@@ -1,13 +1,12 @@
 <template>
   <div>
     <TodoItem
-      v-for="(todo, index) in todos"
-      :key="index"
-      :title="todo.title"
-      :completed="todo.completed"
-      @handleChange="handleChange(index)"
-      @handleRemove="handleRemove(index)"
-    ></TodoItem>
+      v-for="todo in todos"
+      :key="todo.id"
+      :todo="todo"
+      @changeTodos="changeTodos"
+      @deleteTodoByid="deleteTodoByid"
+    />
   </div>
 </template>
 
@@ -15,21 +14,23 @@
 import TodoItem from "./TodoItem.vue";
 
 export default {
-  props: {
-    todos: Array,
-  },
   components: {
     TodoItem,
   },
+  props: {
+    todos: Array,
+  },
   methods: {
-    handleChange(index) {
-      this.$emit("changeTodo", index);
+    changeTodos(id) {
+      this.$emit("changeTodos", id);
     },
-    handleRemove(index) {
-      this.$emit("removeTodo", index);
+    deleteTodoByid(id) {
+      this.$emit("deleteTodoByid", id);
     },
   },
 };
 </script>
 
-<style></style>
+<style scoped>
+/* Ваши стили */
+</style>
