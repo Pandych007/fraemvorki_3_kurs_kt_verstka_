@@ -1,178 +1,192 @@
 <template>
-  <form @submit.prevent="validateAndSubmit" class="card-form">
-    <div class="input-group">
-      <label>Holder of card:</label>
-      <input type="text" v-model="formData.name" required placeholder="John Doe" />
-    </div>
+  <form @submit.prevent="click">
+    <div class="cards">
+      <div class="frontCard">
+        <div class="input-group">
+          <input
+            class="nameCard"
+            v-model="NweDateCard.name"
+            required
+            placeholder="Holder of card"
+          />
+        </div>
 
-    <div class="input-group">
-      <label>Number of card:</label>
-      <input
-        type="text"
-        v-model="formData.number"
-        required
-        maxlength="16"
-        placeholder="1234 5678 9012 3456"
-      />
-    </div>
+        <div class="input-group">
+          <input
+            class="nameCard"
+            v-model="NweDateCard.numberCared"
+            required
+            maxlength="16"
+            placeholder="Card Number"
+          />
+        </div>
 
-    <div class="input-row">
-      <div class="input-group">
-        <label>VALID THRU:</label>
-        <input type="text" v-model="formData.expiration" required placeholder="MM/YY" />
+        <div class="input-row">
+          <div class="input-group">
+            <label>VALID THRU:</label><br />
+            <input class="ym" required placeholder="MM" v-model="NweDateCard.mounth" />
+            <img src="../src/assets/Line 1.png" alt="" />
+            <input class="ym" required placeholder="YY" v-model="NweDateCard.year" />
+          </div>
+        </div>
       </div>
 
-      <div class="cvc-input-group">
-        <input text="password" required maxlength="3" placeholder="CVC" />
+      <div class="backCard">
+        <div class="lineCard"></div>
+        <div class="input-group">
+          <input
+            v-model="NweDateCard.cvc"
+            class="ym cvcCod"
+            type="password"
+            required
+            maxlength="3"
+            placeholder="CVC"
+          />
+        </div>
       </div>
     </div>
-
-    <button type="submit">Send</button>
+    <button type="submit" class="button">добавить</button>
   </form>
+  <table class="styled-table">
+    <tr>
+      <th>имя владельца карты</th>
+      <th>номер карты</th>
+      <th>месяц и год</th>
+      <th>cvc</th>
+    </tr>
+    <tr v-for="(DateCar, index) in DateCard" :key="index">
+      <td>{{ DateCar.name }}</td>
+      <td>{{ DateCar.numberCared }}</td>
+      <td>{{ DateCar.mounth }} / {{ DateCar.year }}</td>
+      <td>{{ NweDateCard.cvc }}</td>
+    </tr>
+  </table>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      formData: {
+      NweDateCard: {
         name: "",
-        number: "",
-        expiration: "",
+        numberCared: "",
+        mounth: "",
+        year: "",
         cvc: "",
       },
+      DateCard: [],
     };
   },
   methods: {
-    validateAndSubmit() {
-      const { name, number, expiration, cvc } = this.formData;
-      const nameRegex = /^[A-Za-z]+\s[A-Za-z]+$/;
-      const cardNumberRegex = /^\d{16}$/;
-      const dateRegex = /^(0[1-9]|1[0-2])\/\d{2}$/;
-      const cvcRegex = /^\d{3}$/;
-
-      const [month, year] = expiration.split("/");
-      const currentYear = new Date().getFullYear() % 100;
-
-      if (!nameRegex.test(name)) {
-        alert("Имя должно содержать 2 слова из букв!");
-        return;
-      }
-
-      if (!cardNumberRegex.test(number)) {
-        alert("Номер карты должен содержать 16 цифр!");
-        return;
-      }
-
-      if (!dateRegex.test(expiration) || +year < currentYear) {
-        alert("Дата карты указана неверно!");
-        return;
-      }
-
-      if (!cvcRegex.test(cvc)) {
-        alert("CVC должен содержать 3 цифры!");
-        return;
-      }
-
-      this.$emit("addCard", { ...this.formData });
-      this.resetForm();
-    },
-    resetForm() {
-      this.formData = {
-        name: "",
-        number: "",
-        expiration: "",
-        cvc: "",
-      };
+    click() {
+      this.DateCard.push({ ...this.NweDateCard });
     },
   },
 };
 </script>
 
 <style scoped>
-.card-form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  background-color: #f3f4f6;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  width: 500px;
-  height: 300px;
+.cards {
   position: relative;
 }
 
-.input-group {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  color: black;
-}
-.input-group input {
-  width: 100px;
-}
-.input-row {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  position: relative;
-}
-
-.input-group,
-.cvc-input-group {
-  width: 48%;
-}
-
-.input-group label,
-.cvc-input-group label {
-  font-weight: bold;
-  font-size: 14px;
-}
-
-.input-group input,
-.cvc-input-group input {
-  padding: 10px;
-  border-radius: 10px;
-  border: 1px solid #d1d5db;
-  background-color: white;
-  font-size: 14px;
-  width: 100%;
-}
-
-.cvc-input-group {
-  background-color: #f0f0f0;
-  border-radius: 10px;
-  padding: 10px;
-  border: 1px solid #d1d5db;
+.frontCard,
+.backCard {
   position: absolute;
-  left: 500px;
-  top: 0;
-  color: black;
-  margin-left: 10px;
-  width: 500px;
-  height: 300px;
 }
-.cvc-input-group input {
-  width: 70px;
-  left: 100px;
+
+.frontCard {
+  width: 388px;
+  height: 239px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  background-color: #ececec;
+  padding: 20px;
+  z-index: 2;
 }
-button {
-  padding: 10px;
+
+.nameCard {
+  width: 324px;
+  height: 42px;
+  border: 2px solid rgba(173, 173, 173, 1);
+  color: rgba(173, 173, 173, 1);
+}
+
+.ym {
+  width: 73px;
+  height: 42px;
+  border: 2px solid rgba(173, 173, 173, 1);
+  color: rgba(173, 173, 173, 1);
+}
+
+.backCard {
+  width: 388px;
+  height: 239px;
+  border-radius: 10px;
+  background-color: rgba(199, 199, 199, 1);
+  padding: 20px;
+  z-index: 1;
+  left: 126px;
+  top: 32px;
+}
+
+.cvcCod {
+  float: right;
+  margin-top: 77px;
+}
+
+.lineCard {
+  width: 100%;
+  height: 50px;
+  margin-top: 60px;
+  background-color: rgba(151, 151, 151, 1);
+}
+
+.button {
+  margin-top: 500px;
+}
+
+.styled-table {
+  width: 1000px;
+  border-collapse: collapse;
+  font-family: "Arial", sans-serif;
+  margin: 20px 0;
+  font-size: 16px;
+  min-width: 300px;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.styled-table th {
   background-color: #2563eb;
   color: white;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  margin-top: auto;
+  text-align: left;
+  padding: 12px;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 
-button:hover {
-  background-color: #1d4ed8;
+.styled-table td {
+  padding: 12px;
+  text-align: left;
+  color: #333;
 }
 
-.cvc-input-group input {
-  color: black;
+.styled-table tr {
+  border-bottom: 1px solid #ddd;
+}
+
+.styled-table tr:nth-child(even) {
+  background-color: #f3f4f6;
+}
+
+.styled-table tr:last-child {
+  border-bottom: none;
+}
+
+.styled-table tr:hover {
+  background-color: #f1f5fb;
 }
 </style>

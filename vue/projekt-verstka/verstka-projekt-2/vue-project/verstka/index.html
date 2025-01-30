@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="cards">
+      <div class="frontCard">
+        <div class="input-group">
+          <input
+            v-model="cardData.name"
+            class="nameCard"
+            required
+            placeholder="Holder of card"
+          />
+        </div>
+
+        <div class="input-group">
+          <input
+            class="nameCard"
+            v-model="cardData.number"
+            required
+            maxlength="16"
+            placeholder="Card Number"
+          />
+        </div>
+
+        <div class="input-row">
+          <div class="input-group">
+            <label>VALID THRU:</label><br />
+            <input
+              class="ym"
+              v-model="cardData.expiration"
+              required
+              placeholder="MM"
+            />
+            <img src="../src/assets/Line 1.png" alt="" />
+            <input
+              class="ym"
+              v-model="cardData.expiration"
+              required
+              placeholder="YY"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="backCard">
+        <div class="lineCard"></div>
+        <div class="input-group">
+          <input
+            class="ym cvcCod"
+            type="password"
+            v-model="cardData.cvc"
+            required
+            maxlength="3"
+            placeholder="CVC"
+          />
+        </div>
+      </div>
+    </div>
+    <button type="submit">Send</button>
+  </body>
+</html>
