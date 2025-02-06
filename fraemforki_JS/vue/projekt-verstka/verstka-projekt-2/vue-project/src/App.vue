@@ -7,7 +7,6 @@
 
 <script>
 import CardForm from "./components/CardForm.vue";
-// import DataTable from "./components/DataTable.vue";
 
 export default {
   components: { CardForm },

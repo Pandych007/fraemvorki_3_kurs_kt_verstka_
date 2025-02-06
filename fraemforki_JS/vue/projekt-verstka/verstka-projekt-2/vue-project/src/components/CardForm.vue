@@ -1,32 +1,50 @@
 <template>
-  <form @submit.prevent="click">
+  <Form ref="form" :validation-schema="validationSchema" @submit.prevent="click">
     <div class="cards">
       <div class="frontCard">
         <div class="input-group">
-          <input
+          <!-- <input
             class="nameCard"
             v-model="NweDateCard.name"
             required
             placeholder="Holder of card"
-          />
+          /> -->
+          <Field class="nameCard" name="name" v-model="form.name" />
+          <ErrorMessage name="name" class="error_text" />
         </div>
 
         <div class="input-group">
-          <input
+          <!-- <input
             class="nameCard"
             v-model="NweDateCard.numberCared"
             required
             maxlength="16"
             placeholder="Card Number"
-          />
+
+
+          /> -->
+          <Field class="nameCard" name="numberCared" v-model="form.nameCard" />
+          <ErrorMessage name="numberCared" class="error_text" />
         </div>
 
         <div class="input-row">
           <div class="input-group">
             <label>VALID THRU:</label><br />
-            <input class="ym" required placeholder="MM" v-model="NweDateCard.mounth" />
-            <img src="../src/assets/Line 1.png" alt="" />
-            <input class="ym" required placeholder="YY" v-model="NweDateCard.year" />
+            <!-- <input
+              class="ym"
+              required
+              placeholder="MM"
+              v-model="NweDateCard.mounth"
+              maxlength="12"
+            /> -->
+
+            <Field class="ym" name="mounth" v-model="form.mounth" />
+            <ErrorMessage name="mounth" class="error_text" />
+
+            <img src="../assets/Line 1.png" alt="" />
+            <!-- <input class="ym" required placeholder="YY" v-model="NweDateCard.year" /> -->
+            <Field class="ym" name="year" v-model="form.year" />
+            <ErrorMessage name="year" class="error_text" />
           </div>
         </div>
       </div>
@@ -34,19 +52,21 @@
       <div class="backCard">
         <div class="lineCard"></div>
         <div class="input-group">
-          <input
+          <!-- <input
             v-model="NweDateCard.cvc"
             class="ym cvcCod"
             type="password"
             required
             maxlength="3"
             placeholder="CVC"
-          />
+          /> -->
+          <Field class="ym cvcCod" name="cvc" v-model="form.cvc" />
+          <ErrorMessage name="cvc" class="error_text" />
         </div>
       </div>
     </div>
     <button type="submit" class="button">добавить</button>
-  </form>
+  </Form>
   <table class="styled-table">
     <tr>
       <th>имя владельца карты</th>
@@ -58,16 +78,20 @@
       <td>{{ DateCar.name }}</td>
       <td>{{ DateCar.numberCared }}</td>
       <td>{{ DateCar.mounth }} / {{ DateCar.year }}</td>
-      <td>{{ NweDateCard.cvc }}</td>
+      <td>{{ DateCar.cvc }}</td>
     </tr>
   </table>
 </template>
 
 <script>
+import { validationSchema } from "@/validationRules";
+import { ErrorMessage, Field, Form } from "vee-validate";
 export default {
+  components: { Field, ErrorMessage, Form },
   data() {
     return {
-      NweDateCard: {
+      validationSchema,
+      form: {
         name: "",
         numberCared: "",
         mounth: "",
@@ -77,9 +101,17 @@ export default {
       DateCard: [],
     };
   },
+  // methods: {
+  //   click() {
+  //     this.DateCard.push({ ...this.NweDateCard });
+  //   },
+  // },
+
   methods: {
-    click() {
-      this.DateCard.push({ ...this.NweDateCard });
+    async click() {
+      const isValid = await this.$refs.form.validate();
+      //console.log(isValid);
+      //this.DateCard.push({ ...this.NweDateCard });
     },
   },
 };
@@ -109,14 +141,14 @@ export default {
   width: 324px;
   height: 42px;
   border: 2px solid rgba(173, 173, 173, 1);
-  color: rgba(173, 173, 173, 1);
+  color: rgb(0, 0, 0);
 }
 
 .ym {
-  width: 73px;
+  width: 80px;
   height: 42px;
   border: 2px solid rgba(173, 173, 173, 1);
-  color: rgba(173, 173, 173, 1);
+  color: rgb(0, 0, 0);
 }
 
 .backCard {
@@ -139,7 +171,7 @@ export default {
   width: 100%;
   height: 50px;
   margin-top: 60px;
-  background-color: rgba(151, 151, 151, 1);
+  background-color: rgb(0, 0, 0);
 }
 
 .button {
@@ -171,7 +203,7 @@ export default {
 .styled-table td {
   padding: 12px;
   text-align: left;
-  color: #333;
+  color: #000000;
 }
 
 .styled-table tr {
