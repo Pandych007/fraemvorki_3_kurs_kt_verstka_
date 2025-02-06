@@ -1,48 +1,24 @@
 <template>
-  <Form ref="form" :validation-schema="validationSchema" @submit.prevent="click">
+  <Form ref="form" :validation-schema="validationSchema" @submit="click">
     <div class="cards">
       <div class="frontCard">
         <div class="input-group">
-          <!-- <input
-            class="nameCard"
-            v-model="NweDateCard.name"
-            required
-            placeholder="Holder of card"
-          /> -->
           <Field class="nameCard" name="name" v-model="form.name" />
           <ErrorMessage name="name" class="error_text" />
         </div>
 
         <div class="input-group">
-          <!-- <input
-            class="nameCard"
-            v-model="NweDateCard.numberCared"
-            required
-            maxlength="16"
-            placeholder="Card Number"
-
-
-          /> -->
-          <Field class="nameCard" name="numberCared" v-model="form.nameCard" />
+          <Field class="nameCard" name="numberCared" v-model="form.numberCared" />
           <ErrorMessage name="numberCared" class="error_text" />
         </div>
 
         <div class="input-row">
           <div class="input-group">
             <label>VALID THRU:</label><br />
-            <!-- <input
-              class="ym"
-              required
-              placeholder="MM"
-              v-model="NweDateCard.mounth"
-              maxlength="12"
-            /> -->
-
             <Field class="ym" name="mounth" v-model="form.mounth" />
             <ErrorMessage name="mounth" class="error_text" />
 
             <img src="../assets/Line 1.png" alt="" />
-            <!-- <input class="ym" required placeholder="YY" v-model="NweDateCard.year" /> -->
             <Field class="ym" name="year" v-model="form.year" />
             <ErrorMessage name="year" class="error_text" />
           </div>
@@ -52,14 +28,6 @@
       <div class="backCard">
         <div class="lineCard"></div>
         <div class="input-group">
-          <!-- <input
-            v-model="NweDateCard.cvc"
-            class="ym cvcCod"
-            type="password"
-            required
-            maxlength="3"
-            placeholder="CVC"
-          /> -->
           <Field class="ym cvcCod" name="cvc" v-model="form.cvc" />
           <ErrorMessage name="cvc" class="error_text" />
         </div>
@@ -67,19 +35,24 @@
     </div>
     <button type="submit" class="button">добавить</button>
   </Form>
+
   <table class="styled-table">
-    <tr>
-      <th>имя владельца карты</th>
-      <th>номер карты</th>
-      <th>месяц и год</th>
-      <th>cvc</th>
-    </tr>
-    <tr v-for="(DateCar, index) in DateCard" :key="index">
-      <td>{{ DateCar.name }}</td>
-      <td>{{ DateCar.numberCared }}</td>
-      <td>{{ DateCar.mounth }} / {{ DateCar.year }}</td>
-      <td>{{ DateCar.cvc }}</td>
-    </tr>
+    <thead>
+      <tr>
+        <th>имя владельца карты</th>
+        <th>номер карты</th>
+        <th>месяц и год</th>
+        <th>cvc</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="(DateCar, index) in DateCard" :key="index">
+        <td>{{ DateCar.name }}</td>
+        <td>{{ DateCar.numberCared }}</td>
+        <td>{{ DateCar.mounth }} / {{ DateCar.year }}</td>
+        <td>{{ DateCar.cvc }}</td>
+      </tr>
+    </tbody>
   </table>
 </template>
 
@@ -101,17 +74,20 @@ export default {
       DateCard: [],
     };
   },
-  // methods: {
-  //   click() {
-  //     this.DateCard.push({ ...this.NweDateCard });
-  //   },
-  // },
-
   methods: {
     async click() {
       const isValid = await this.$refs.form.validate();
-      //console.log(isValid);
-      //this.DateCard.push({ ...this.NweDateCard });
+      if (isValid) {
+        this.DateCard.push({ ...this.form });
+
+        this.form = {
+          name: "",
+          numberCared: "",
+          mounth: "",
+          year: "",
+          cvc: "",
+        };
+      }
     },
   },
 };
@@ -222,3 +198,4 @@ export default {
   background-color: #f1f5fb;
 }
 </style>
+++

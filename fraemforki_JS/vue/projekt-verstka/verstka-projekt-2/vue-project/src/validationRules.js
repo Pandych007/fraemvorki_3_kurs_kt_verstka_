@@ -1,15 +1,32 @@
 import * as yup from "yup";
 
 export const validationSchema = yup.object({
-  name: yup.string().required("Введите имя").min(2, "Минимум 2 слова"),
-  //   numberCared: yup
-  //     .string()
-  //     .required("Ведите номер карты ")
-  //     .matches(/^[0-9]{16}$/, "Длина 16 символов и в конце любой спец. символ"),
-  //   mounth: yup
-  //     .string()
-  //     .oneOf([yup.ref("password"), null], "Пароли не совпадают")
-  //     .required("Повторите пароль"),
-  //   year: yup.date().max(new Date(), "Дата должна быть ранее текущей"),
-  //   cvc: yup.string().required("Введите cvc ").min(3, "Минимум 2 слова"),
+  name: yup
+    .string()
+    .required("Введите имя владельца карты")
+    .min(2, "Имя должно содержать минимум 2 символа"),
+
+  numberCared: yup
+    .string()
+    .required("Введите номер карты")
+    .matches(/^[0-9]{16}$/, "Номер карты должен состоять из 16 цифр"),
+
+  mounth: yup
+    .string()
+    .required("Введите месяц")
+    .matches(/^(0[1-9]|1[0-2])$/, "Месяц должен быть в формате MM (01-12)"),
+
+  year: yup
+    .string()
+    .required("Введите год")
+    .matches(/^[0-9]{4}$/, "Год должен состоять из 4 цифр (например, 2023)")
+    .test("year", "Год не может быть в будущем", (value) => {
+      const currentYear = new Date().getFullYear();
+      return parseInt(value) <= currentYear;
+    }),
+
+  cvc: yup
+    .string()
+    .required("Введите CVC")
+    .matches(/^[0-9]{3}$/, "CVC должен состоять из 3 цифр"),
 });
