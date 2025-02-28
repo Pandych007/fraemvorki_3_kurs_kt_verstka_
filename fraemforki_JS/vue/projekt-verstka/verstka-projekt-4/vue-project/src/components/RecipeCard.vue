@@ -1,31 +1,25 @@
 <template>
   <div class="recipe-card">
-    <img :src="recipe.image" alt="Recipe Image" class="recipe-image" />
-    <h3>{{ recipe.name }}</h3>
-    <p><strong>Difficulty:</strong> {{ recipe.difficulty || "Unknown" }}</p>
+    <div>{{ recipe.name }}</div>
+    <button @click="addToFavorites(recipe)">Add to Favorites</button>
   </div>
 </template>
 
 <script>
 export default {
-  props: {
-    recipe: Object,
+  props: ["recipe"],
+  methods: {
+    addToFavorites(recipe) {
+      this.$emit("add-to-favorites", recipe);
+    },
   },
 };
 </script>
 
 <style scoped>
 .recipe-card {
-  padding: 15px;
-  border-radius: 10px;
-  background: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  text-align: center;
-}
-
-.recipe-image {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px;
 }
 </style>
