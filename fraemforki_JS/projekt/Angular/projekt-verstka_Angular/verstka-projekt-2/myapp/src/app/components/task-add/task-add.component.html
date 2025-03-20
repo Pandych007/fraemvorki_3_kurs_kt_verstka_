@@ -1,0 +1,15 @@
+<form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="dayTitle">День:</label>
+    <input id="dayTitle" formControlName="dayTitle" />
+  </div>
+  <div>
+    <label for="idDay">Выберите важность :</label>
+    <input id="idDay" formControlName="idDay" />
+  </div>
+  <div>
+    <label for="priority">Описание:</label>
+    <input id="priority" formControlName="priority" />
+  </div>
+  <button type="submit">добавить</button>
+</form>

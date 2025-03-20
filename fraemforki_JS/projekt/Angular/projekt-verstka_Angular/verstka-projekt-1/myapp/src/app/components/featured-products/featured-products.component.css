@@ -1,0 +1,114 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+.featuredProducts {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    height: 100vh;
+    background-color: #845EC2;
+}
+
+.left, .right {
+    box-sizing: border-box;
+}
+
+.left{
+    width: 60%;
+    position: relative;
+}
+
+.right{
+    width: 40%;
+}
+
+.right > h1 {
+    margin-bottom: 40px;
+    color: white;
+}
+
+.left > h1 {
+    font-size: 60px;
+    letter-spacing: 5px;
+    color: transparent;
+    -webkit-text-stroke: 1px white;
+    position: absolute;
+    top: -55px;
+    left: 55%;
+    transform: translateX(-50%);
+    width: 100%; 
+    text-align: center; 
+}
+
+.right > p {
+    margin-bottom: 40px;
+}
+
+p {
+    color: white;
+    font-size: 20px;
+    line-height: 1.6;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.price {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.price p {
+    font-size: 30px;
+    color: white;
+}
+
+.images {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+    position: relative; 
+}
+
+.images img {
+    margin: 0 110px;
+}
+
+.images img:nth-child(2) {
+    position: absolute;
+    top: -35px;
+}
+
+.images img:nth-child(1),
+.images img:nth-child(3) {
+    position: relative;
+    top: 30px;
+}
+.buttons {
+    display: flex;
+    gap: 50px;
+    margin-top: 20px;
+}
+
+.add, .view {
+    background-color: #10B981;
+    color: white;
+    padding: 15px 35px;
+    border-radius: 10px;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.add {
+    background-color: #10B981;
+}
+
+.view {
+    background-color: #845EC2;
+}
