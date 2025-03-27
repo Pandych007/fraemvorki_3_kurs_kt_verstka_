@@ -1,15 +1,118 @@
-<form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
-  <div>
-    <label for="dayTitle">День:</label>
-    <input id="dayTitle" formControlName="dayTitle" />
+<!-- <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+  <div class="row">
+    <div style="display: block">
+      <div class="row">
+        <div>
+          <select id="idDay" formControlName="idDay">
+            <option value="">День</option>
+            <option value="1">Понедельник</option>
+            <option value="2">Вторник</option>
+            <option value="3">Среда</option>
+            <option value="4">Четверг</option>
+            <option value="5">Пятница</option>
+            <option value="6">Суббота</option>
+            <option value="7">Воскресенье</option>
+          </select>
+        </div>
+        <div>
+          <select id="priority" formControlName="priority">
+            <option value="">Выберите важность</option>
+            <option value="1">важно</option>
+            <option value="0">не важно</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <input
+            class="dayTitle"
+            id="dayTitle"
+            formControlName="dayTitle"
+            placeholder="Описание"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="btn_block">
+      <button type="submit">добавить</button>
+    </div>
   </div>
-  <div>
-    <label for="idDay">Выберите важность :</label>
-    <input id="idDay" formControlName="idDay" />
-  </div>
-  <div>
-    <label for="priority">Описание:</label>
-    <input id="priority" formControlName="priority" />
-  </div>
-  <button type="submit">добавить</button>
 </form>
+
+<div class="tasks">
+  @for(day of tasks;track day.idDay){
+  <div>
+    <h2>{{ day.dayTitle }}</h2>
+    <ul>
+      @for(task of day.tasks; track task.idDay){ @if(task.priority){
+      <li>{{ task.titleTask }}</li>
+      } @else {
+      <li>{{ task.titleTask }}</li>
+      } }
+    </ul>
+  </div>
+  }
+</div> -->
+
+<form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+  <div class="row">
+    <div style="display: block">
+      <div class="row">
+        <div>
+          <select id="idDay" formControlName="idDay">
+            <option value="">День</option>
+            <option value="1">Понедельник</option>
+            <option value="2">Вторник</option>
+            <option value="3">Среда</option>
+            <option value="4">Четверг</option>
+            <option value="5">Пятница</option>
+            <option value="6">Суббота</option>
+            <option value="7">Воскресенье</option>
+          </select>
+        </div>
+        <div>
+          <select id="priority" formControlName="priority">
+            <option value="">Выберите важность</option>
+            <option value="1">важно</option>
+            <option value="0">не важно</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <input
+            class="dayTitle"
+            id="dayTitle"
+            formControlName="dayTitle"
+            placeholder="Описание"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="btn_block">
+      <button type="submit">добавить</button>
+    </div>
+  </div>
+</form>
+
+<div class="tasks">
+  @for(day of tasks; track day.idDay) {
+  <div class="task-day">
+    <button class="delete-day" (click)="removeDay(day.idDay)">❌</button>
+    <h2>{{ day.dayTitle }}</h2>
+    <ul>
+      @for(task of day.tasks; track task.idTask) {
+      <li>
+        {{ task.titleTask }}
+        <button
+          class="delete-task"
+          (click)="removeTask(day.idDay, task.idTask)"
+        >
+          ❌
+        </button>
+      </li>
+      }
+    </ul>
+  </div>
+  }
+</div>

@@ -1,12 +1,10 @@
 form {
   background: #e8eded;
-  padding: 15px;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  max-width: 500px;
+  width: 1000px;
+  height: 200px;
+  border-radius: 15px;
   border: 2px solid #44b9a1;
+  padding: 35px 45px 0 45px;
 }
 
 div {
@@ -19,19 +17,114 @@ input {
   border: 1px solid #000;
   border-radius: 5px;
   background: white;
-  flex: 1;
+  font-size: 20px;
 }
 
+.row {
+  display: flex;
+  align-items: flex-end;
+}
 button {
   background: #22c2a0;
   color: white;
-  border: none;
-  padding: 8px 15px;
-  border-radius: 20px;
-  cursor: pointer;
-  align-self: flex-end;
+  width: 163px;
+  height: 45px;
+  top: 180px;
+  left: 944px;
+  border-width: 1px;
+  border-radius: 23px;
+  font-size: 20px;
 }
 
 button:hover {
   background: #1a9d80;
+}
+
+select {
+  width: 253px;
+  height: 45px;
+  font-size: 20px;
+}
+
+.dayTitle {
+  width: 544px;
+  height: 45px;
+  border-width: 1px;
+  margin-top: 30px;
+}
+
+#priority {
+  margin-left: 46px;
+}
+.btn_block {
+  width: 326px;
+  text-align: center;
+  display: flex;
+  justify-content: end;
+}
+/* __________________________________________________________________ */
+.tasks {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: #20b2aa;
+  padding: 20px;
+}
+
+.tasks div {
+  display: flex;
+  align-items: center;
+  background: #f8f8f8;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+h2 {
+  background: #2c3e50;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  min-width: 50px;
+  text-align: center;
+}
+
+ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+li {
+  padding: 10px 15px;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+li:hover {
+  opacity: 0.8;
+}
+
+li[priority] {
+  background: #e74c3c;
+}
+
+li:not([priority]) {
+  background: #27ae60;
+}
+
+li::after {
+  font-size: 14px;
+  margin-left: 8px;
+  cursor: pointer;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.1);
+  padding: 2px;
 }
