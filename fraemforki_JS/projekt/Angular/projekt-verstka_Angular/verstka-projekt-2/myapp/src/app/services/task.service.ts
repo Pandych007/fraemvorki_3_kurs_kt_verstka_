@@ -9,8 +9,8 @@ export class TaskService {
       idDay: 1,
       dayTitle: 'Понедельник',
       tasks: [
-        { idTask: 1, titleTask: 'помыть руки', priority: false },
-        { idTask: 2, titleTask: 'получить права', priority: true },
+        { idTask: 1, titleTask: 'получить права', priority: true },
+        { idTask: 2, titleTask: 'помыть рукип', priority: false },
       ],
     },
     {
@@ -22,8 +22,8 @@ export class TaskService {
       idDay: 3,
       dayTitle: 'Среда',
       tasks: [
-        { idTask: 1, titleTask: 'схоить в магазин ', priority: false },
-        { idTask: 2, titleTask: 'купить хлеб', priority: true },
+        { idTask: 1, titleTask: 'купить хлеб ', priority: true },
+        { idTask: 2, titleTask: 'схоить в магазин', priority: false },
       ],
     },
   ];

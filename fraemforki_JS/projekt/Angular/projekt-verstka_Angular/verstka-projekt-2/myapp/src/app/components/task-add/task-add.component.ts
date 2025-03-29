@@ -28,7 +28,7 @@ export class TaskAddComponent implements OnInit {
       const formDate = this.taskForm.value;
       this.taskService.addTasks(Number(formDate.idDay), {
         titleTask: formDate.dayTitle,
-        priority: formDate.priority,
+        priority: formDate.priority == '1' ? true : false,
       });
       this.taskForm.reset();
     }

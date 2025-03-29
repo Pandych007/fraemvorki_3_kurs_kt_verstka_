@@ -38,34 +38,37 @@
     </div>
   </div>
 </form>
-
 <div class="tasks">
-  @for(day of tasks;track day.idDay){
-    <span><button (click)="deliteDay(day.idDay)" class="delite">X</button></span>
-
-  <div style="margin-top: -19px;">
+  @for(day of tasks; track day.idDay){
+  <input type="hidden" name="id" value="{{ day.idDay }}" />
+  <span>
+    <button (click)="deliteDay(day.idDay)" class="delite">X</button>
+  </span>
+  <div style="margin-top: -19px">
     <h2>{{ day.dayTitle }}</h2>
     <ul>
-      <li>
-      @for(task of day.tasks; track task.idDay){ @if(task.priority){
+      @for(task of day.tasks; track task.idTask){ @if(task.priority){
       <li class="red">
         {{ task.titleTask }}
-        <button (click)="deliteTasks(task.idTask, day.idDay)" class="delite ddd">
+        <button
+          (click)="deliteTasks(task.idTask, day.idDay)"
+          class="delite ddd"
+        >
           X
         </button>
       </li>
       } @else {
       <li class="green">
         {{ task.titleTask }}
-        <button (click)="deliteTasks(task.idTask, day.idDay)" class="delite ddd">
+        <button
+          (click)="deliteTasks(task.idTask, day.idDay)"
+          class="delite ddd"
+        >
           X
         </button>
       </li>
       } }
-    </li>
-
     </ul>
-
   </div>
   }
 </div>
