@@ -1,6 +1,6 @@
 form {
   background: #e8eded;
-  width: 1000px;
+  margin-bottom: 30px;
   height: 200px;
   border-radius: 15px;
   border: 2px solid #44b9a1;
@@ -106,18 +106,12 @@ li {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  height: 20px;
+  margin: 5px;
 }
 
 li:hover {
   opacity: 0.8;
-}
-
-li[priority] {
-  background: #e74c3c;
-}
-
-li:not([priority]) {
-  background: #27ae60;
 }
 
 li::after {
@@ -127,4 +121,35 @@ li::after {
   border-radius: 50%;
   background: rgba(0, 0, 0, 0.1);
   padding: 2px;
+}
+/* ___________________________________________ */
+
+.red {
+  background-color: red;
+  position: relative;
+}
+
+.green {
+  background-color: green;
+  /* position: relative; */
+}
+
+.delite {
+  width: 15px;
+  height: 15px;
+  background: red;
+  border-radius: 50%;
+  font-size: 10px;
+  text-align: center;
+  padding: 0;
+}
+
+span {
+  display: block;
+  text-align: right;
+  z-index: 100;
+}
+.ddd {
+  margin-bottom: 39px;
+  margin-right: -20px;
 }
